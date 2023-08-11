@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') %> 
+<style>
+    body {
+        background-color: #fff1e6;
+    }
+</style>
+<section class="container mb-3" style="width: 35em; height: 58em; border: 2px solid black;">
+    <div class="row">
+        <h1 class="text-center">Editting - <%= campground.title %></h1>
+        <hr>
+        <img class="img-fluid mb-3" src="https://images.unsplash.com/photo-1597071118769-3d970bd1652b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNhbXBncm91bmRzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="">
+    </div>
+    <form action="/campgrounds/<%= campground._id %>" method="post">
+        <div class="row mb-3">
+            <div class="col-6">
+                <label for="first">First Name:</label>
+                <select class="form-select" name="first" id="first" required>
+                    <option value="">--Choose--</option>
+                    <% for (let descriptor of descriptors) { %>
+                        <option value="<%= descriptor %>" <%= campground.title.split(' ')[0] === descriptor ? 'selected' : '' %>><%= descriptor %></option>
+                    <% } %>
+                </select>
+            </div>
+
+            <div class="col-6">
+                <label for="last">Last Name:</label>
+                <select class="form-select" name="last" id="last" required>
+                    <option value="">--Choose--</option>
+                    <% for (let place of places) { %>
+                        <option value="<%= place %>" <%= campground.title.split(' ')[1] === place.split(' ')[0] ? 'selected' : '' %>><%= place %></option>
+                    <% } %>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="location">Location:</label>
+                <select class="form-select" name="location" id="location" required>
+                    <option value="">--Choose--</option>
+                    <% for (let city of cities) { %>
+                        <option value="<%= `${city.city}, ${city.state}` %>" <%= campground.location === `${city.city}, ${city.state}` ? 'selected' : '' %>><%= `${city.city}, ${city.state}` %></option>
+                    <% } %>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="price">Price:</label>
+                <input class="form-control" type="number" value=<%= campground.price %> name="price" id="price">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" id="description" cols="63" rows="1" style="resize: none"><%= campground.description %></textarea>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <label for="imageSrc">Image URL:</label>
+                <input class="form-control" type="text" value=<%= campground.imageSrc %> name="imageSrc" id="imageSrc">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="/campgrounds/<%= campground._id %>"><button class="btn btn-danger mx-3" type="button">Cancel</button></a>
+    </form>
+</section>
