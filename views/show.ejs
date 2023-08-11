@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate') %> 
+<style>
+    body {
+        background-color: #fff1e6;
+    }
+</style>
+<div class="card">
+    <div class="row">
+        <div class="col-md-4">
+            <img src=<%= campground.imageSrc %> class="card-img-top w-100 h-100" alt="">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 class="card-title"><%= campground.title %></h3>
+                <p class="card-text text-muted"><span class="text-success">Location: </span><%= campground.location %></p>
+                <h5 class="card-text mb-5"><span class="text-danger">Price: </span>$<%= campground.price %></h5>
+                <p class="card-text mb-5"><h6 class="text-primary">Description: </h6><%= campground.description %></p>
+                <a href="/campgrounds/<%= campground._id %>/edit"><button class="btn btn-warning">Edit</button></a>
+                <a href="/campgrounds/<%= campground._id %>/delete"><button class="btn btn-danger mx-3">Delete</button></a>
+                <br> <br>
+                <a href="/campgrounds"><button class="btn btn-primary">View All Campgrounds</button></a>
+            </div>
+        </div>
+    </div>
+</div>
